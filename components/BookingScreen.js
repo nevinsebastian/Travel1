@@ -269,7 +269,7 @@ const styles = StyleSheet.create({
   },
   guestControlIcon: {
     paddingHorizontal: 8,
-  },
+  },   
 });
 
 export default BookingScreen;
