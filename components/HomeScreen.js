@@ -117,7 +117,7 @@ const HomeScreen = () => {
           />
         </ScrollView>
         
-        {/* Posteddddddr of Offers */}
+        {/* Postedddddd r of Offers */}
         <View style={styles.posterContainer}>
           <Image source={require('../assets/travel1.jpg')} style={styles.posterImage} />
         </View>
