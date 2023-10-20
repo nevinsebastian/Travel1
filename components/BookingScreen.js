@@ -1,27 +1,24 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, Modal, Pressable } from 'react-native';
 import { Linking } from 'react-native';
-import { FontAwesome5 } from '@expo/vector-icons'; // Import FontAwesome5 for icons
-import { Calendar } from 'react-native-calendars'; // Import Calendar component
+import { FontAwesome5 } from '@expo/vector-icons';
+import { Calendar } from 'react-native-calendars';
 import moment from 'moment';
 
 const BookingScreen = ({ route }) => {
-  // Get program details from the route parameters
   const { program } = route.params;
 
   const handleViewMapPress = () => {
-    // Define the map URL or open the map app on the device
     const mapURL = 'https://maps.google.com'; // Replace with your map URL
     Linking.openURL(mapURL);
   };
 
-  const [selectedDate, setSelectedDate] = useState(null); // State for selected date
-  const [guests, setGuests] = useState(1); // State for the number of guests
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [guests, setGuests] = useState(1);
   const [isDatePickerVisible, setDatePickerVisible] = useState(false);
-  const [markedDates, setMarkedDates] = useState({}); // State for marked dates
+  const [markedDates, setMarkedDates] = useState({});
 
   const handleDateChange = (date) => {
-    // Update the selected date when it changes
     setSelectedDate(date);
   };
 
@@ -36,7 +33,6 @@ const BookingScreen = ({ route }) => {
   const maxDate = moment().format('YYYY-MM-DD');
 
   const onDayPress = (day) => {
-    // Mark the selected date
     const date = day.dateString;
     setMarkedDates({
       [date]: { selected: true, marked: true },
@@ -56,24 +52,18 @@ const BookingScreen = ({ route }) => {
 
   return (
     <View style={styles.container}>
-      {/* Program Images */}
       <View style={styles.imageContainer}>
-        {/* Replace with your program images */}
-        <Image source={program.imageSource} style={styles.programImage} />
+        <Image source={{ uri: program.image_url }} style={styles.programImage} />
       </View>
 
-      {/* Program Name */}
-      <Text style={styles.programName}>{program.description}</Text>
+      <Text style={styles.programName}>{program.name}</Text>
 
-      {/* Program Address */}
       <Text style={styles.addressText}>{program.location}</Text>
 
-      {/* View on Map (as a hyperlink) */}
       <Text style={styles.viewMapText} onPress={handleViewMapPress}>
         View on Map
       </Text>
 
-      {/* Your Booking Details Section */}
       <View style={styles.bookingDetails}>
         <View style={styles.transparentTile}>
           <Text style={styles.bookingDetailsHeading}>Your Booking Details</Text>
@@ -102,11 +92,10 @@ const BookingScreen = ({ route }) => {
         </View>
       </View>
 
-      {/* Transparent Tile at the Bottom (Footer) */}
       <View style={styles.footer}>
         <View style={styles.transparentTile}>
           <View style={styles.priceAndBookNow}>
-            <Text style={styles.priceText}>{program.price}</Text>
+            <Text style={styles.priceText}>{`$${program.price}`}</Text>
             <TouchableOpacity style={styles.bookNowButton}>
               <Text style={styles.bookNowButtonText}>Book Now</Text>
             </TouchableOpacity>
@@ -114,7 +103,6 @@ const BookingScreen = ({ route }) => {
         </View>
       </View>
 
-      {/* Date Picker Modal */}
       <Modal animationType="slide" transparent={false} visible={isDatePickerVisible}>
         <View style={styles.datePickerContainer}>
           <View style={styles.datePickerHeader}>
@@ -146,6 +134,7 @@ const BookingScreen = ({ route }) => {
     </View>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {
