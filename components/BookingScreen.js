@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, Modal, Pressable } from 'react-native';
 import { Linking } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
-import { Calendar } from 'react-native-calendars';
 import moment from 'moment';
 
 const BookingScreen = ({ route }) => {
@@ -15,30 +14,6 @@ const BookingScreen = ({ route }) => {
 
   const [selectedDate, setSelectedDate] = useState(null);
   const [guests, setGuests] = useState(1);
-  const [isDatePickerVisible, setDatePickerVisible] = useState(false);
-  const [markedDates, setMarkedDates] = useState({});
-
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
-  };
-
-  const toggleDatePicker = () => {
-    setDatePickerVisible(!isDatePickerVisible);
-  };
-
-  const handleDatePickerDone = () => {
-    toggleDatePicker();
-  };
-
-  const maxDate = moment().format('YYYY-MM-DD');
-
-  const onDayPress = (day) => {
-    const date = day.dateString;
-    setMarkedDates({
-      [date]: { selected: true, marked: true },
-    });
-    setSelectedDate(date);
-  };
 
   const decrementGuests = () => {
     if (guests > 1) {
@@ -70,11 +45,9 @@ const BookingScreen = ({ route }) => {
           <View style={styles.bookingRow}>
             <FontAwesome5 name="calendar" size={20} color="#007AFF" style={styles.icon} />
             <Text style={styles.bookingLabel}>Date:</Text>
-            <TouchableOpacity onPress={toggleDatePicker}>
-              <Text style={styles.bookingValue}>
-                {selectedDate ? moment(selectedDate).format('MMM DD, YYYY') : 'Select date'}
-              </Text>
-            </TouchableOpacity>
+            <Text style={styles.bookingValue}>
+              {selectedDate ? moment(selectedDate).format('MMM DD, YYYY') : 'Select date'}
+            </Text>
           </View>
           <View style={styles.bookingRow}>
             <FontAwesome5 name="user-friends" size={20} color="#007AFF" style={styles.icon} />
@@ -102,39 +75,9 @@ const BookingScreen = ({ route }) => {
           </View>
         </View>
       </View>
-
-      <Modal animationType="slide" transparent={false} visible={isDatePickerVisible}>
-        <View style={styles.datePickerContainer}>
-          <View style={styles.datePickerHeader}>
-            <Text style={styles.datePickerHeaderText}>Select date</Text>
-            <Pressable onPress={toggleDatePicker} style={styles.closeButton}>
-              <FontAwesome5 name="times" size={20} color="#000" />
-            </Pressable>
-          </View>
-          <Calendar
-            current={selectedDate}
-            minDate={maxDate}
-            onDayPress={onDayPress}
-            markedDates={markedDates}
-            theme={{
-              calendarBackground: '#000',
-              selectedDayBackgroundColor: '#007AFF',
-              selectedDayTextColor: '#fff',
-              todayTextColor: '#007AFF',
-              textDisabledColor: '#999',
-              dayTextColor: '#fff',
-              monthTextColor: '#fff',
-            }}
-          />
-          <TouchableOpacity style={styles.doneButton} onPress={handleDatePickerDone}>
-            <Text style={styles.doneButtonText}>Done</Text>
-          </TouchableOpacity>
-        </View>
-      </Modal>
     </View>
   );
 };
-
 
 const styles = StyleSheet.create({
   container: {
@@ -165,7 +108,7 @@ const styles = StyleSheet.create({
   },
   viewMapText: {
     fontSize: 16,
-    color: '#007AFF', // Set the hyperlink color to match your design
+    color: '#007AFF',
     textDecorationLine: 'none',
   },
   transparentTile: {
@@ -222,43 +165,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  datePickerContainer: {
-    flex: 1,
-    backgroundColor: '#000',
-    padding: 16,
-  },
-  datePickerHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 16,
-  },
-  datePickerHeaderText: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#fff',
-  },
-  closeButton: {
-    padding: 8,
-  },
-  doneButton: {
-    backgroundColor: '#007AFF',
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    borderRadius: 8,
-    margin: 16,
-  },
-  doneButtonText: {
-    color: 'white',
-    fontWeight: 'bold',
-  },
   guestsControl: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   guestControlIcon: {
     paddingHorizontal: 8,
-  },   
+  },
 });
 
 export default BookingScreen;
