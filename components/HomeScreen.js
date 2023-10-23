@@ -10,7 +10,7 @@ const HomeScreen = () => {
 
   useEffect(() => {
     // Fetch data from the API when the component mounts
-    axios.get('http://172.20.10.11:8000/listactivity/activities/')
+    axios.get('http://192.168.29.198:8000/listactivity/activities/')
       .then((response) => {
         setActivityData(response.data);
       })
@@ -29,7 +29,7 @@ const HomeScreen = () => {
       <View style={styles.tileContainer}>
         <Image source={{ uri: item.image_url }} style={styles.tileImage} />
         <Text style={styles.tileDescription}>{item.name}</Text>
-        <Text style={styles.tilePrice}>{`$${item.price}`}</Text>
+        <Text style={styles.tilePrice}>{`₹${item.price}`}</Text>
         <Text style={styles.tileLocation}>{item.location}</Text>
       </View>
     </TouchableOpacity>
@@ -57,8 +57,10 @@ const HomeScreen = () => {
           />
         </ScrollView>
 
+        <Text style={styles.introductoryOffersTitle}>Introductory Offers</Text>
+
         <View style={styles.posterContainer}>
-          <Image source={require('../assets/travel1.jpg')} style={styles.posterImage} />
+          <Image source={require('../assets/offer2.jpeg')} style={styles.posterImage} />
         </View>
       </ScrollView>
     </View>
@@ -129,16 +131,25 @@ const styles = StyleSheet.create({
     marginTop: 20, // Adjust the margin to your preference
   },
   posterImage: {
-    width: '90%', // Adjust the width to your preference
-    height: 200, // Adjust the height to your preference
-    resizeMode: 'cover',
+    width: '100%', // Set the width to fill the container
+    height: 'auto', // Let the height adjust automatically
+    aspectRatio: 16 / 9, // Set the aspect ratio to maintain the image's proportions
+    resizeMode: 'cover', // Maintain aspect ratio and cover the entire space
     borderRadius: 8,
-  },
+  }
+,  
   sectionHeading: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 10,
     marginLeft: 10, // Adjust the marginLeft to move the heading to the right
+  },
+  introductoryOffersTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    marginLeft: 10,
+    marginTop:20
   },
 });
 

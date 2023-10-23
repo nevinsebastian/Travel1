@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, Modal, Pressable } from 'react-native';
-import { Linking } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
 import moment from 'moment';
+import { Linking } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import axios from 'axios';
 
 const BookingScreen = ({ route }) => {
   const { program } = route.params;
+  const navigation = useNavigation();
 
   const handleViewMapPress = () => {
     const mapURL = 'https://maps.google.com'; // Replace with your map URL
@@ -32,6 +35,8 @@ const BookingScreen = ({ route }) => {
       </View>
 
       <Text style={styles.programName}>{program.name}</Text>
+
+      <Text style={styles.description}>{program.description}</Text>
 
       <Text style={styles.addressText}>{program.location}</Text>
 
@@ -68,8 +73,11 @@ const BookingScreen = ({ route }) => {
       <View style={styles.footer}>
         <View style={styles.transparentTile}>
           <View style={styles.priceAndBookNow}>
-            <Text style={styles.priceText}>{`$${program.price}`}</Text>
-            <TouchableOpacity style={styles.bookNowButton}>
+            <Text style={styles.priceText}>{`₹${program.price}`}</Text>
+            <TouchableOpacity
+              style={styles.bookNowButton}
+              onPress={() => navigation.navigate('Booking')}
+            >
               <Text style={styles.bookNowButtonText}>Book Now</Text>
             </TouchableOpacity>
           </View>
@@ -101,6 +109,11 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 12,
+  },
+  description: {
+    fontSize: 16,
+    marginBottom: 8,
+    color: '#555',
   },
   addressText: {
     fontSize: 16,
