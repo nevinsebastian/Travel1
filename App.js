@@ -1,14 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import AuthScreen from "./components/AuthScreen"; // Import the AuthScreen component
+import AuthScreen from "./components/AuthScreen";
 import HomeScreen from "./components/HomeScreen";
-import BookingScreen from "./components/BookingScreen"; // Import the BookingScreen component
+import BookingScreen from "./components/BookingScreen";
+import * as Font from "expo-font";
 
 const Stack = createStackNavigator();
 
+async function loadFonts() {
+  await Font.loadAsync({
+    "HankenGrotesk-Black": require("./assets/fonts/HankenGrotesk-Black.ttf"),
+    // You can add more font styles if needed
+  });
+}
+
 function App() {
-  const [isSignedIn, setIsSignedIn] = useState(false);
+  const [isFontLoaded, setFontLoaded] = useState(false);
+
+  useEffect(() => {
+    loadFonts()
+      .then(() => {
+        setFontLoaded(true);
+      })
+      .catch((error) => {
+        console.warn("Font loading error", error);
+      });
+  }, []);
+
+  if (!isFontLoaded) {
+    return null; // Render nothing until fonts are loaded
+  }
+
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -19,8 +42,13 @@ function App() {
         />
         <Stack.Screen
           name="Booking"
-          component={BookingScreen} // Add BookingScreen as a screen
-          options={{ title: 'Book Program' }} // Set the screen title
+          component={BookingScreen}
+          options={{ title: "Book Program" }}
+        />
+        <Stack.Screen
+          name="Auth"
+          component={AuthScreen}
+          options={{ title: "Authentication" }}
         />
         {/* Add more screens here if needed */}
       </Stack.Navigator>

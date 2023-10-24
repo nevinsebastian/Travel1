@@ -76,7 +76,6 @@ const BookingScreen = ({ route }) => {
             <Text style={styles.priceText}>{`₹${program.price}`}</Text>
             <TouchableOpacity
               style={styles.bookNowButton}
-              onPress={() => navigation.navigate('Booking')}
             >
               <Text style={styles.bookNowButtonText}>Book Now</Text>
             </TouchableOpacity>
