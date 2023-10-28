@@ -3,16 +3,14 @@ import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from 'rea
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Footer from './Footer';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
   const [activityData, setActivityData] = useState([]);
-  const insets = useSafeAreaInsets();
 
   useEffect(() => {
-    axios.get('http://192.168.29.198:8000/listactivity/activities/')
+    axios.get('http://172.20.10.11:8000/listactivity/activities/')
       .then((response) => {
         setActivityData(response.data);
       })
@@ -26,7 +24,7 @@ const HomeScreen = () => {
   };
 
   return (
-    <View style={[styles.container, { paddingTop: insets.top }]}>
+    <View style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity style={styles.hamburger}>
           <Ionicons name="ios-menu" size={32} color="black" />
@@ -97,7 +95,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
     paddingLeft: 5,
     paddingRight: 5,
-    marginBottom:'0%'
+    marginBottom: 0, // Adjust this as needed
   },
   tileImage: {
     width: TILE_SIZE,
