@@ -28,6 +28,15 @@ const BookingScreen = ({ route }) => {
     setGuests(guests + 1);
   };
 
+  const handleContinuePress = () => {
+    // Navigate to the screen where you can select the desired time slot
+    navigation.navigate('TimeSlotSelection', {
+      program,
+      selectedDate,
+      guests,
+    });
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
@@ -75,9 +84,10 @@ const BookingScreen = ({ route }) => {
           <View style={styles.priceAndBookNow}>
             <Text style={styles.priceText}>{`₹${program.price}`}</Text>
             <TouchableOpacity
-              style={styles.bookNowButton}
+              style={styles.continueButton}
+              onPress={handleContinuePress}
             >
-              <Text style={styles.bookNowButtonText}>Book Now</Text>
+              <Text style={styles.continueButtonText}>Continue</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -133,23 +143,21 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
   },
-  bookNowButton: {
+  continueButtonText: {
     backgroundColor: '#007AFF',
     paddingHorizontal: 20,
     paddingVertical: 10,
     borderRadius: 8,
   },
-  bookNowButtonText: {
+  continueButton: {
+    backgroundColor: '#007AFF',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 8,
+  },
+  continueButtonText: {
     color: 'white',
     fontWeight: 'bold',
-  },
-  bookingDetails: {
-    marginVertical: 16,
-  },
-  bookingRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 8,
   },
   icon: {
     marginRight: 8,

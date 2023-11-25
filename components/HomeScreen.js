@@ -10,7 +10,7 @@ const HomeScreen = () => {
   const [activityData, setActivityData] = useState([]);
 
   useEffect(() => {
-    axios.get('http://172.20.10.11:8000/listactivity/activities/')
+    axios.get('http://172.20.10.3:8000/listactivity/activities/')
       .then((response) => {
         setActivityData(response.data);
       })

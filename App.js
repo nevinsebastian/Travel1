@@ -4,6 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import AuthScreen from "./components/AuthScreen";
 import HomeScreen from "./components/HomeScreen";
 import BookingScreen from "./components/BookingScreen";
+import TimeSlotSelection from "./components/TimeSlotSelection";
 import * as Font from "expo-font";
 
 const Stack = createStackNavigator();
@@ -49,6 +50,10 @@ function App() {
           name="Auth"
           component={AuthScreen}
           options={{ title: "Authentication" }}
+        />
+        <Stack.Screen
+        name="TimeSlotSelection"
+        component={TimeSlotSelection}
         />
         {/* Add more screens here if needed */}
       </Stack.Navigator>
