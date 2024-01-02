@@ -40,7 +40,7 @@ const BookingScreen = ({ route }) => {
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-        <Image source={{ uri: program.image_url }} style={styles.programImage} />
+        <Image source={{ uri: program.image}} style={styles.programImage} />
       </View>
 
       <Text style={styles.programName}>{program.name}</Text>

@@ -10,7 +10,7 @@ const HomeScreen = () => {
   const [activityData, setActivityData] = useState([]);
 
   useEffect(() => {
-    axios.get('http://172.20.10.3:8000/listactivity/activities/')
+    axios.get('http://13.55.58.126:8000/listactivity/activities/')
       .then((response) => {
         setActivityData(response.data);
       })
@@ -42,7 +42,7 @@ const HomeScreen = () => {
             onPress={() => handleTilePress(item)}
           >
             <View style={styles.tileContainer}>
-              <Image source={{ uri: item.image_url }} style={styles.tileImage} />
+              <Image source={{ uri: item.image}} style={styles.tileImage} />
               <Text style={styles.tileDescription}>{item.name}</Text>
               <Text style={styles.tilePrice}>{`₹${item.price}`}</Text>
               <Text style={styles.tileLocation}>{item.location}</Text>
