@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity, SafeAreaView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
@@ -24,7 +24,7 @@ const HomeScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity style={styles.hamburger}>
           <Ionicons name="ios-menu" size={32} color="black" />
@@ -58,7 +58,7 @@ const HomeScreen = () => {
       </View>
 
       <Footer navigation={navigation} />
-    </View>
+    </SafeAreaView>
   );
 }
 

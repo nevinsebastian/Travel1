@@ -1,10 +1,12 @@
 import React from 'react';
-import { View,Text, TextInput, StyleSheet } from 'react-native';
+import { View, Text, TextInput, StyleSheet, SafeAreaView } from 'react-native';
 
 export const HeaderTitle = () => {
   return (
     <View style={styles.headerTitle}>
-      <Text style={styles.headerText}>Home</Text>
+      <SafeAreaView>
+        <Text style={styles.headerText}>Home</Text>
+      </SafeAreaView>
     </View>
   );
 };
@@ -12,11 +14,13 @@ export const HeaderTitle = () => {
 export const HeaderRight = () => {
   return (
     <View style={styles.headerRight}>
-      <TextInput
-        placeholder="Search"
-        style={styles.searchInput}
-        placeholderTextColor="#ccc"
-      />
+      <SafeAreaView>
+        <TextInput
+          placeholder="Search"
+          style={styles.searchInput}
+          placeholderTextColor="#ccc"
+        />
+      </SafeAreaView>
     </View>
   );
 };
